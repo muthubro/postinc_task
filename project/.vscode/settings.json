@@ -1,0 +1,7 @@
+{
+    "python.pythonPath": "D:\\Python 3.6.6\\python.exe",
+
+    "files.autoSave": "afterDelay",
+
+    "files.autoSaveDelay": 3000,
+}

@@ -1,0 +1,36 @@
+{% extends 'blueprint/page.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <h5>{{ object.name }}</h5>
+    <h6>Author: {{ object.author }}</h6>
+
+    {% if object.genre %}
+        <h6>Genre: {{ object.genre }}</h6>
+    {% endif %}
+
+    {% if object.publish_date %}
+        <h6>Publish Date: {{ object.publish_date|date }}</h6>
+    {% endif %}
+
+    <br>
+
+    {% if object.library.user != request.user %}
+
+        {% with request.user.profile.favorites.all as favorites %}
+        
+            {% if object not in favorites %}
+                <a href="{% url 'main:add_fav' object.id %}">Add to favorites</a>
+            
+            {% else %}
+                <a href="{% url 'main:remove_fav' object.id %}">Remove from favorites</a>
+
+            {% endif %}
+
+        {% endwith%}
+
+    {% endif %}
+
+{% endblock %}

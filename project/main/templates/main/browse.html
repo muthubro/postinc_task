@@ -1,0 +1,64 @@
+{% extends 'blueprint/page.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <form method="get">
+
+        <input type="text" name="search" value="{{ request.GET.search }}" class="form-control">
+
+        <input type="radio" name="type" value="name" checked="checked">Name
+        <input type="radio" name="type" value="author">Author
+        <input type="radio" name="type" value="both">Both
+
+        <button type="submit" class="btn btn-primary">Search</button>
+
+    </form>
+
+    <br>
+
+    {% if is_paginated %}
+
+        <div class='pagination'>
+                
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span>
+                {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+    {% for book in object_list %}
+
+        <h5>
+            <a href="{% url 'main:view_book' book.id %}">{{ book.name }}></a>
+        </h5>
+        <h6>Author: {{ book.author }}</h6>
+
+        {% if book.genre %}
+            <h6>Genre: {{ book.genre }}</h6>
+        {% endif %}
+
+        {% if book.publish_date %}
+            <h6>Publish Date: {{ book.publish_date }}</h6>
+        {% endif %}
+
+        <br>
+
+    {% empty %}
+
+        <h6>No books found.</h6>
+
+    {% endfor %}
+
+{% endblock %}

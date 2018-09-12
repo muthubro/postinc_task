@@ -1,0 +1,13 @@
+{% extends 'blueprint/page.html' %}
+
+{% block content %}
+
+    {% if request.user.is_authenticated %}
+        You are {{ request.user.username }}.
+    
+    {% else %}
+        You are a guest.
+
+    {% endif %}
+
+{% endblock %}

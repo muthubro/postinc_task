@@ -1,0 +1,19 @@
+{% extends 'blueprint/page.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <h3>Add a book</h3>
+
+    <form method='post'>
+
+        {% csrf_token %}
+        {% bootstrap_form form %}
+
+        <button class='btn btn-primary'>Add</button>
+
+    </form>
+
+{% endblock %}
+    

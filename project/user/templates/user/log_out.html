@@ -1,0 +1,13 @@
+{% extends 'blueprint/page.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <h4>You have successfully logged out.</h4>
+
+    <p>
+        <a href="{% url 'user:login' %}">Log in</a> again.
+    </p>
+
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'blueprint/page.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <h3>User details</h3>
+
+    <h5>First Name: {{ object.first_name }}</h5>
+    <h5>Last Name: {{ object.last_name }}</h5>
+
+    {% if request.user.is_authenticated %}
+
+        <h5>Email: {{ object.email }}</h5>
+
+        <ul>
+            {% for library in object.library_set.all %}
+
+                <li>
+                    {{ library.name }}:
+                    <br>
+
+                    <ol>
+                        {% for book in library.book_set.all %}
+
+                            <li>
+                                <h6>
+                                    {{ book.name }}
+                                </h6>
+
+                                <span>
+                                    Author: {{ book.author }}
+                                </span>
+                                <br>
+
+                                {% if book.genre %}
+                                    <span>
+                                        Genre: {{ book.genre }}
+                                    </span>
+                                    <br>
+                                {% endif %}
+
+                                {% if book.publish_date %}
+                                    <span>
+                                        Publish date: {{ book.publish_date }}
+                                    </span>
+                                    <br>
+                                {% endif %}
+                            </li>
+
+                        {% endfor %}
+                    </ol>
+                </li>
+
+            {% endfor %}
+        </ul>
+
+        <h5>Favorites:</h5>
+
+        <ul>
+            {% with object.profile.favorites.all as favorites %}
+
+                {% for book in favorites %}
+
+                <li>
+                        <h6>
+                            {{ book.name }}>
+                        </h6>
+
+                        <span>
+                            User: {{ book.library.user.name }}
+                        </span>
+
+                        <span>
+                            Author: {{ book.author }}
+                        </span>
+                        <br>
+
+                        {% if book.genre %}
+                            <span>
+                                Genre: {{ book.genre }}
+                            </span>
+                            <br>
+                        {% endif %}
+
+                        {% if book.publish_date %}
+                            <span>
+                                Publish date: {{ book.publish_date }}
+                            </span>
+                            <br>
+                        {% endif %}
+
+                    </li>
+
+                {% endfor %}
+
+            {% endwith%}
+        </ul>
+
+    {% else %}
+        
+        <p><a href="{% url 'user:login' %}">Log in</a> to see additional details.</p>
+
+    {% endif %}
+
+{% endblock %}

@@ -1,0 +1,68 @@
+{% load staticfiles %}
+{% load bootstrap4 %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Task Website</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel='stylesheet' href="{% static 'bootstrap/css/bootstrap.min.css' %}">
+</head>
+<body>
+    <nav class='navbar navbar-expand-md navbar-dark bg-dark static-top'>
+        <a class='navbar-brand' href='/'>Home</a>
+
+        <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarCollapsibleItems'>
+            <span class='navbar-toggler-icon'></span>
+        </button>
+
+        <div class='collapse navbar-collapse' id='navbarCollapsibleItems'>
+            <ul class='navbar-nav mr-auto'>
+
+                <li class='nav-item'>
+                    <a class='nav-link' href="{% url 'user:browse_users' %}">Users</a>
+                </li>
+
+                {% if request.user.is_authenticated %}
+
+                    <li class='nav-item'>
+                        <a class='nav-link' href="{% url 'user:profile' %}">Profile</a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'main:browse' %}">Browse</a>
+                    </li>
+
+                    <li class='nav-item'>
+                        <a class='nav-link' href="{% url 'user:logout' %}">Log out</a>
+                    </li>
+
+                {% else %}
+                    <li class="nav-item">
+                        <a class='nav-link' href="{% url 'user:login' %}">Log in</a>
+                    </li>
+                    <li class='nav-item'>
+                        <a class='nav-link' href="{% url 'user:signup' %}">Sign up</a>
+                    </li>
+
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+
+    <div class='container-fluid mt-4'>
+        {% bootstrap_javascript jquery=True %}
+        {% bootstrap_messages %}
+
+        {% block content %}
+            Nothing yet.
+        {% endblock %}
+    </div>
+
+    <script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'jquery/jquery-3.3.1.min.js' %}"></script>
+</body>
+</html>

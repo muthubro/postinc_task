@@ -1,0 +1,3 @@
+To change your email, click this link:
+
+{{ uri }}

@@ -1,0 +1,36 @@
+{% extends 'blueprint/page.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <h3>Users:</h3>
+    <br>
+
+    {% for user in object_list %}
+
+        <h5><a href="{% url 'user:user_details' user.id %}">{{ user.username }}</a></h5>
+
+    {% endfor %}
+
+    {% if is_paginated %}
+
+        <div class='pagination'>
+                
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span>
+                {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+            </span>
+
+            {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            {% endif %}
+
+        </div>
+
+    {% endif %}
+
+{% endblock %}

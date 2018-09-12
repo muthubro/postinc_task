@@ -1,0 +1,5 @@
+{
+    "python.pythonPath": "C:\\Users\\Muathasim Mohamed P\\.virtualenvs\\simple-login-qodnMVg7\\Scripts\\python.exe",
+
+    "python.linting.pylintArgs": ["--load-plugin=pylint-django"],
+}

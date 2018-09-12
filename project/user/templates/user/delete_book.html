@@ -1,0 +1,22 @@
+{% extends 'blueprint/page.html' %}
+
+{% load bootstrap4 %}
+
+{% block content %}
+
+    <h3>Delete Book</h3>
+
+    <form method='post'>
+
+        {% csrf_token %}
+
+        <span>Are you sure you want to delete {{ object.name }}?</span>
+        <br>
+
+        <button type="submit" class='btn btn-danger'>Delete</button>
+    </form>
+
+    <br>
+    <a href="{% url 'user:profile' %}">Back to profile</a>
+
+{% endblock %}
